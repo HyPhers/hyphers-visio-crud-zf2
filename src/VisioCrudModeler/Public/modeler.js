@@ -110,16 +110,31 @@ $(document).ready(function() {
 
 
     var RetObject = {
+
+        getSelectedTables: function(){
+            var selectedTables = new Array();
+            var selectedElements = $('.use_tables:checked');
+            $.each(selectedElements, function(index, element) {
+                selectedTables[element.value] = 1;
+            });
+            return selectedTables;
+        },
         getSelecteElements: function() {
             var elements = new Array();
             var selectedElements = $('ul[data-target="selected"]').find('li');
+            var selectedTables = this.getSelectedTables();
 
             $.each(selectedElements, function(index, element) {
+
+                var tableName = $(element).data('form');
+                if (!selectedTables[tableName]){
+                    return;
+                }
 
                 var validators = [];
                 var filters = [];
                 var elementName = $(element).data('element');
-                var tableName = $(element).data('form');
+
 
                 var paramsWrap = $('div[data-form="' + tableName + '"][data-element="' + elementName + '"]');
                 $.each(paramsWrap.find('.validator-list').find('li'), function(index, validator) {
@@ -147,9 +162,14 @@ $(document).ready(function() {
         },
         getTablesDescription: function() {
             var tables = new Array();
+            var selectedTables = this.getSelectedTables();
             $.each($('.base-class-name'), function(index, element) {
+                var tableName = $(element).data('form');
+                if (!selectedTables[tableName]){
+                    return;
+                }
                 var table = {
-                    name: $(element).data('form'),
+                    name: tableName,
                     class: $(element).val()
                 };
                 tables.push(table);
@@ -243,7 +263,6 @@ $(document).ready(function() {
     });
 
     $('.build-validators').on('click', function(e) {
-
         ret = {
             params: RetObject.getParams(),
             tables: RetObject.getTablesDescription(),

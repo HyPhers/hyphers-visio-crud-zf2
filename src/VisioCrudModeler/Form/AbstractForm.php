@@ -29,7 +29,7 @@ abstract class AbstractForm extends Form implements ValidatorManagerAwareInterfa
     /**
      * Get validator  manager
      *
-     * @param ValidatorManager $validatorManager
+     * @return ValidatorManager $validatorManager
      */
     public function getValidatorManager()
     {
@@ -52,13 +52,13 @@ abstract class AbstractForm extends Form implements ValidatorManagerAwareInterfa
     }
     
     /**
-     * Return prepeared jquery validate plugin script
+     * Return prepared jquery validate plugin script
      * 
      * @return string
      */
     public function getJqueryValidateScript()
     {
-        return $this->getValidatorManager()->getScript('customer');
+        return $this->getValidatorManager()->getScript($this->getAttribute('name'));
     }
     
 }

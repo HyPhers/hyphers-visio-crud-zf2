@@ -4,9 +4,16 @@
           connectWith: ".connectedSortable"
         }).disableSelection();
   });
-  </script>
-  
+</script>
 
+<style type="text/css">
+    .sortable{
+        border: 1px solid #eee;
+        padding: 5px;
+        min-height: 20px;
+    }
+
+</style>
   
 
 <div class="row clearfix" style="margin-top: 50px;">
@@ -14,14 +21,18 @@
         <div class="box box-element">
             <div class="view">
                 <h3>Data source </h3>
-                <ul>
+                <ul class="list-unstyled">
                     <?foreach ($tables as $table):?>
-                        <li><a href="#" class="show-fields" data-form="<?=$table?>"><?=$table?></a></li>
+                        <li>
+                            <input type="checkbox" name="use_tables[]" value="<?=$table?>" title="Use this table" class="use_tables" />
+                            <a href="#" class="show-fields" data-form="<?=$table?>"><?=$table?></a>
+                        </li>
                     <?endforeach;?>
                 </ul>
             </div>
         </div>
     </div>
+
     <div class="col-md-7 column ui-sortable" style="">
         <div class="box box-element">
             
@@ -67,7 +78,7 @@
                 <div class="form-group">
                     <label>Validators</label>
                     <select class="form-control validators">
-                        <option value="null">Wybierz</option>
+                        <option value="null">Choose:</option>
                         <option value="required">Required</option>
                         <option value="string-length">StringLength</option>
                         <option value="digits">Digits</option>
@@ -82,7 +93,7 @@
                 <div class="form-group">
                     <label>Filters</label>
                     <select class="form-control filters">
-                        <option value="null">Wybierz</option>
+                        <option value="null">Choose:</option>
                         <option value="string-trim">StringTrim</option>
                         <option value="strip-tags">StripTags</option>
                     </select>

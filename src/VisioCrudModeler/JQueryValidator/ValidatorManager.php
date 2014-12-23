@@ -42,7 +42,8 @@ class ValidatorManager implements InputFilterAwareInterface
      * @var array
      */
     protected $classToOmmit = array(
-        'Zend\Validator\InArray'
+        'Zend\Validator\InArray',
+        'Zend\Validator\Explode'
     );
 
     /**

@@ -299,7 +299,11 @@ class FormGenerator implements GeneratorInterface
         $method->setFlags(\Zend\Code\Generator\MethodGenerator::FLAG_PROTECTED);
 
         $parameter = new \Zend\Code\Generator\ParameterGenerator("query");
-        $parameter->setType("\\Zend\\Db\\Sql\\Select");
+        //$parameter->setType("\\Zend\\Db\\Sql\\Select"); // throws Strict standards like:
+        /* Strict standards: Declaration of Crud\Grid\BaseGrid\BaseKidsGrid::initFilters() should be compatible
+         * with ZfTable\AbstractTable::initFilters($query) in /var/www/xxx/module/Crud/src/Crud/Grid/BaseGrid/BaseKidsGrid.php on line 16
+         */
+
 
         $method->setParameter($parameter);
         $class->addMethodFromGenerator($method);

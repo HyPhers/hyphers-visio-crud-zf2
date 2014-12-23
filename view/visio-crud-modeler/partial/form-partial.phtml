@@ -6,13 +6,19 @@ echo $this->form()->openTag($form);
 
 ?>
 
-<?php foreach ($form as $element) : ?>
+<?php foreach ($form as $element) :?>
 
     <? if($element->getAttribute('type') == 'checkbox'):?>
-        <div class="checkbox">
-            <label>
-                <?php echo $this->formElement($element); ?>
-            </label>
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <?php echo $this->formElement($element); ?>
+                    <?php echo $element->getLabel() ?>
+                </label>
+                <?if($element->getOption('help-block')):?>
+                    <p class="help-block"><?php echo $element->getOption('help-block')?></p>
+                <?endif?>
+            </div>
         </div>
 
     <? elseif($element->getAttribute('type') == 'hidden'):?>
@@ -22,12 +28,27 @@ echo $this->form()->openTag($form);
         <div class="form-group">
             <?php echo $this->formElement($element); ?>
         </div>
+
+    <? elseif($element->getAttribute('type') == 'multi_checkbox'):?>
+        <div class="form-group">
+            <label><?php echo $element->getLabel() ?>&nbsp;
+            </label>
+            <div class="checkbox">
+                <?php echo $this->formMultiCheckbox()->setSeparator('</div><div class="checkbox">')->render($element); ?>
+            </div>
+            <?if($element->getOption('help-block')):?>
+                <p class="help-block"><?php echo $element->getOption('help-block')?></p>
+            <?endif?>
+        </div>
     
     <?else: ?>
         <div class="form-group">
             <label><?php echo $element->getLabel() ?>&nbsp;
             </label>
             <?php echo $this->formElement($element); ?>
+            <?if($element->getOption('help-block')):?>
+                <p class="help-block"><?php echo $element->getOption('help-block')?></p>
+            <?endif?>
             <? if($this->formElementErrors($element)): ?>
                 <span class="help-inline"><?php echo $this->formElementErrors($element) ?></span>
             <?endif; ?>

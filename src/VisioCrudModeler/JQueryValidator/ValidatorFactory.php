@@ -14,7 +14,7 @@ class ValidatorFactory
 {
 
     /**
-     * Mapper between Zend Validate Class and Jquery ekvivalent
+     * Mapper between Zend Validate Class and Jquery equivalent
      *
      * @var array
      */
@@ -41,9 +41,10 @@ class ValidatorFactory
     {
         if (array_key_exists($name, self::$mapper)) {
             $className = self::$mapper[$name];
-            return new $className($validatorOrValue);
+            $validator = new $className($validatorOrValue);
+            return $validator;
         } else {
-            throw new \Exception('Given validator doesn not exists: ' . $name);
+            throw new \Exception("Given validator doesn't not exists: " . $name);
         }
     }
 }
