@@ -20,6 +20,7 @@ class ValidatorFactory
      */
     public static $mapper = array(
         'Required' => 'VisioCrudModeler\JQueryValidator\Validator\Required',
+        'Zend\Validator\NotEmpty' => 'VisioCrudModeler\JQueryValidator\Validator\Required',
         'Zend\Validator\StringLength' => 'VisioCrudModeler\JQueryValidator\Validator\StringLength',
         'Zend\Validator\EmailAddress' => 'VisioCrudModeler\JQueryValidator\Validator\Email',
         'Zend\Validator\Digits' => 'VisioCrudModeler\JQueryValidator\Validator\Digits',
